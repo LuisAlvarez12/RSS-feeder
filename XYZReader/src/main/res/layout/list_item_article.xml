@@ -13,7 +13,7 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-    <com.example.xyzreader.ui.DynamicHeightNetworkImageView
+    <com.example.xyzreader.ui.DynamicNetworkImageView
         android:id="@+id/thumbnail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -43,6 +43,12 @@
             android:textColor="@color/ltgray"
             android:ellipsize="end"
             android:maxLines="4" />
+        <View
+            android:id="@+id/breakpoint"
+            android:layout_width="100dp"
+            android:layout_marginLeft="16dp"
+            android:layout_height="2dp"
+            />
 
         <TextView
             android:id="@+id/article_subtitle"

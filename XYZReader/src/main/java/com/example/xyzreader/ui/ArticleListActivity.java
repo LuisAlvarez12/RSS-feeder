@@ -6,10 +6,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.Loader;
+import android.content.res.ColorStateList;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarActivity;
@@ -33,6 +35,7 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.ImageRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
@@ -233,8 +236,7 @@ public class ArticleListActivity extends ActionBarActivity implements
                holder.thumbnailView.setImageUrl(
 ////                    //ex. url is https://d17h27t6h515a5.cloudfront.net/topher/2017/March/58c5be62_scarlet-plague/scarlet-plague.jpg
                     mCursor.getString(ArticleLoader.Query.THUMB_URL),
-                    ImageLoaderHelper.getInstance(ArticleListActivity.this).getImageLoader());
-
+                    ImageLoaderHelper.getInstance(ArticleListActivity.this).getImageLoader(),holder.breakpoint);
             holder.thumbnailView.setAspectRatio(mCursor.getFloat(ArticleLoader.Query.ASPECT_RATIO));
 
         }
@@ -249,17 +251,19 @@ public class ArticleListActivity extends ActionBarActivity implements
 
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        public DynamicHeightNetworkImageView thumbnailView;
+        public DynamicNetworkImageView thumbnailView;
         public TextView titleView;
         public TextView subtitleView;
+        public View breakpoint;
 
         public ViewHolder(View view) {
             super(view);
-            thumbnailView = (DynamicHeightNetworkImageView) view.findViewById(R.id.thumbnail);
+            thumbnailView = (DynamicNetworkImageView) view.findViewById(R.id.thumbnail);
             //item title
             titleView = (TextView) view.findViewById(R.id.article_title);
             //item subtitle
             subtitleView = (TextView) view.findViewById(R.id.article_subtitle);
+            breakpoint = view.findViewById(R.id.breakpoint);
         }
     }
 }
