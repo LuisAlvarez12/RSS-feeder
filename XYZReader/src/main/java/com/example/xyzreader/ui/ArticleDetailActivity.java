@@ -42,17 +42,19 @@ public class ArticleDetailActivity extends ActionBarActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            //full screen
             getWindow().getDecorView().setSystemUiVisibility(
                     View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN |
                             View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
         }
         setContentView(R.layout.activity_article_detail);
-
+        //start loader
         getLoaderManager().initLoader(0, null, this);
-
+        //flip pager for switching articles on left and right swipe
         mPagerAdapter = new MyPagerAdapter(getFragmentManager());
         mPager = (ViewPager) findViewById(R.id.pager);
         mPager.setAdapter(mPagerAdapter);
+
         mPager.setPageMargin((int) TypedValue
                 .applyDimension(TypedValue.COMPLEX_UNIT_DIP, 1, getResources().getDisplayMetrics()));
         mPager.setPageMarginDrawable(new ColorDrawable(0x22000000));
@@ -60,6 +62,7 @@ public class ArticleDetailActivity extends ActionBarActivity
         mPager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
             @Override
             public void onPageScrollStateChanged(int state) {
+                //standard scrolling
                 super.onPageScrollStateChanged(state);
                 mUpButton.animate()
                         .alpha((state == ViewPager.SCROLL_STATE_IDLE) ? 1f : 0f)
@@ -68,13 +71,16 @@ public class ArticleDetailActivity extends ActionBarActivity
 
             @Override
             public void onPageSelected(int position) {
+                //change cursor
                 if (mCursor != null) {
                     mCursor.moveToPosition(position);
                 }
                 mSelectedItemId = mCursor.getLong(ArticleLoader.Query._ID);
+                //????
                 updateUpButtonPosition();
             }
         });
+
 
         mUpButtonContainer = findViewById(R.id.up_container);
 
@@ -101,6 +107,7 @@ public class ArticleDetailActivity extends ActionBarActivity
 
         if (savedInstanceState == null) {
             if (getIntent() != null && getIntent().getData() != null) {
+                //get intent in order to get item id
                 mStartId = ItemsContract.Items.getItemId(getIntent().getData());
                 mSelectedItemId = mStartId;
             }
@@ -109,6 +116,7 @@ public class ArticleDetailActivity extends ActionBarActivity
 
     @Override
     public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
+        //do another loader that contains the info to adapt to the viewpager
         return ArticleLoader.newAllArticlesInstance(this);
     }
 
@@ -119,6 +127,7 @@ public class ArticleDetailActivity extends ActionBarActivity
 
         // Select the start ID
         if (mStartId > 0) {
+            //create the cursor and move to the position selected
             mCursor.moveToFirst();
             // TODO: optimize
             while (!mCursor.isAfterLast()) {
@@ -146,11 +155,14 @@ public class ArticleDetailActivity extends ActionBarActivity
         }
     }
 
+    //its for the back button but still not sure what it does :(
     private void updateUpButtonPosition() {
         int upButtonNormalBottom = mTopInset + mUpButton.getHeight();
         mUpButton.setTranslationY(Math.min(mSelectedItemUpButtonFloor - upButtonNormalBottom, 0));
     }
 
+
+    //Adapter that allows the switching for the viewpager
     private class MyPagerAdapter extends FragmentStatePagerAdapter {
         public MyPagerAdapter(FragmentManager fm) {
             super(fm);

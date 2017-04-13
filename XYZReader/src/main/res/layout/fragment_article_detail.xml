@@ -37,10 +37,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:maxWidth="@dimen/detail_card_max_width"
+                android:maxWidth=x"@dimen/detail_card_max_width"
                 android:background="#fff"
+                android:paddingTop="20dp"
                 android:elevation="2dp"
-                android:layout_marginTop="@dimen/detail_card_top_margin">
+                >
 
                 <LinearLayout
                     android:id="@+id/meta_bar"

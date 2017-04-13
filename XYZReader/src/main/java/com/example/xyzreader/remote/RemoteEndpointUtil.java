@@ -20,8 +20,10 @@ public class RemoteEndpointUtil {
     }
 
     public static JSONArray fetchJsonArray() {
+
         String itemsJson = null;
         try {
+            //fetch the standard text of all the article information
             itemsJson = fetchPlainText(Config.BASE_URL);
         } catch (IOException e) {
             Log.e(TAG, "Error fetching items JSON", e);
@@ -30,16 +32,17 @@ public class RemoteEndpointUtil {
 
         // Parse JSON
         try {
+            //converts the plaintext into a json array
             JSONTokener tokener = new JSONTokener(itemsJson);
             Object val = tokener.nextValue();
             if (!(val instanceof JSONArray)) {
                 throw new JSONException("Expected JSONArray");
             }
+            //returns the jsonarray
             return (JSONArray) val;
         } catch (JSONException e) {
             Log.e(TAG, "Error parsing items JSON", e);
         }
-
         return null;
     }
 

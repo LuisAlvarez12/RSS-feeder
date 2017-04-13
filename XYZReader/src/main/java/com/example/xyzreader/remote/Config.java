@@ -9,9 +9,11 @@ public class Config {
     public static final URL BASE_URL;
     private static String TAG = Config.class.toString();
 
+    //get url to be parsed to json, called in RemoteEndpointUtil
     static {
         URL url = null;
         try {
+            //json info
             url = new URL("https://go.udacity.com/xyz-reader-json" );
         } catch (MalformedURLException ignored) {
             // TODO: throw a real error

@@ -35,6 +35,8 @@ public class ImageLoaderHelper {
                 return mImageCache.get(key);
             }
         };
+
+
         mImageLoader = new ImageLoader(queue, imageCache);
     }
 

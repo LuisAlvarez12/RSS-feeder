@@ -36,6 +36,7 @@ public class UpdaterService extends IntentService {
     protected void onHandleIntent(Intent intent) {
         Time time = new Time();
 
+        //check if a network connection is available
         ConnectivityManager cm = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
         NetworkInfo ni = cm.getActiveNetworkInfo();
         if (ni == null || !ni.isConnected()) {
@@ -43,23 +44,27 @@ public class UpdaterService extends IntentService {
             return;
         }
 
+        //broadcast for refreshing the swiperefreshlayout
         sendStickyBroadcast(
                 new Intent(BROADCAST_ACTION_STATE_CHANGE).putExtra(EXTRA_REFRESHING, true));
 
         // Don't even inspect the intent, we only do one thing, and that's fetch content.
         ArrayList<ContentProviderOperation> cpo = new ArrayList<ContentProviderOperation>();
 
+        //uri leading to the directory of items
         Uri dirUri = ItemsContract.Items.buildDirUri();
 
         // Delete all items
         cpo.add(ContentProviderOperation.newDelete(dirUri).build());
 
         try {
+            //gets json info from url and makes it into array
             JSONArray array = RemoteEndpointUtil.fetchJsonArray();
             if (array == null) {
                 throw new JSONException("Invalid parsed item array" );
             }
 
+            //add to sqldb
             for (int i = 0; i < array.length(); i++) {
                 ContentValues values = new ContentValues();
                 JSONObject object = array.getJSONObject(i);
@@ -71,15 +76,19 @@ public class UpdaterService extends IntentService {
                 values.put(ItemsContract.Items.PHOTO_URL, object.getString("photo" ));
                 values.put(ItemsContract.Items.ASPECT_RATIO, object.getString("aspect_ratio" ));
                 values.put(ItemsContract.Items.PUBLISHED_DATE, object.getString("published_date"));
+                //add to arraylist
+                //ContentProviderOperation allows a batch insert for data integrity reasons
                 cpo.add(ContentProviderOperation.newInsert(dirUri).withValues(values).build());
             }
-
+            //itemsProvider
             getContentResolver().applyBatch(ItemsContract.CONTENT_AUTHORITY, cpo);
 
         } catch (JSONException | RemoteException | OperationApplicationException e) {
             Log.e(TAG, "Error updating content.", e);
         }
 
+
+        //broadcast for refreshing the swiperefreshlayout
         sendStickyBroadcast(
                 new Intent(BROADCAST_ACTION_STATE_CHANGE).putExtra(EXTRA_REFRESHING, false));
     }
