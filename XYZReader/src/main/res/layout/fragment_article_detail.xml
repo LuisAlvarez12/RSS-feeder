@@ -6,6 +6,10 @@
 
     <com.example.xyzreader.ui.ObservableScrollView
         android:id="@+id/scrollview"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:paddingTop="16dp"
+        android:layout_marginBottom="40dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -43,74 +47,7 @@
                 android:elevation="2dp"
                 >
 
-                <LinearLayout
-                    android:id="@+id/meta_bar"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="#333"
-                    android:layout_gravity="bottom"
-                    android:orientation="vertical"
-                    android:paddingLeft="@dimen/detail_inner_horiz_margin"
-                    android:paddingRight="@dimen/detail_inner_horiz_margin"
-                    android:paddingTop="@dimen/detail_metabar_vert_padding"
-                    android:paddingBottom="@dimen/detail_metabar_vert_padding"
-                    android:layout_marginBottom="@dimen/detail_metabar_vert_padding">
 
-                    <TextView
-                        android:id="@+id/article_title"
-                        style="?android:attr/textAppearanceLarge"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:paddingBottom="@dimen/detail_metabar_title_bottom_padding"
-                        android:fontFamily="sans-serif-condensed"
-                        android:textColor="#fff"
-                        android:textStyle="bold"
-                        android:textSize="@dimen/detail_title_text_size"
-                        android:lineSpacingMultiplier="0.9" />
-
-                    <TextView
-                        android:id="@+id/article_byline"
-                        style="?android:attr/textAppearanceSmall"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="#8fff" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="60dp"
-                    >
-                    <ImageView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:src="@drawable/xyz_logo"
-                        android:id="@+id/related_article_1"/>
-                    <ImageView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:src="@drawable/xyz_logo"
-                        android:id="@+id/related_article_2"/>
-                    <ImageView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:src="@drawable/xyz_logo"
-                        android:id="@+id/related_article_3"/>
-                    <ImageView
-                        android:layout_width="0dp"
-                        android:src="@drawable/xyz_logo"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:id="@+id/related_article_4"/>
-                    <ImageView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:src="@drawable/xyz_logo"
-                        android:id="@+id/related_article_5"/>
-                </LinearLayout>
                 <TextView
                     android:id="@+id/article_body"
                     style="?android:attr/textAppearanceMedium"
@@ -118,7 +55,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/detail_inner_horiz_margin"
                     android:layout_marginRight="@dimen/detail_inner_horiz_margin"
-                    android:paddingBottom="@dimen/detail_body_bottom_margin"
                     android:textColor="@color/primary_text_default_material_light"
                     android:textColorLink="@color/theme_accent"
                     android:textSize="@dimen/detail_body_text_size"
@@ -127,6 +63,101 @@
             </com.example.xyzreader.ui.MaxWidthLinearLayout>
         </FrameLayout>
     </com.example.xyzreader.ui.ObservableScrollView>
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_gravity="bottom"
+    android:orientation="vertical"
+    android:paddingTop="4dp"
+    android:elevation="2dp"
+    android:layout_height="wrap_content">
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:id="@+id/color_divider_nav"
+        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:background="@color/cardview_light_background"
+        android:layout_height="40dp">
+
+        <TextView
+            android:id="@+id/tv_show_details"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:text="Show details"
+            android:textSize="18sp"
+            android:gravity="center"
+            android:textColor="@color/primary_text_default_material_light"
+            android:layout_weight="1"/>
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:id="@+id/color_divider"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            />
+        <TextView
+            android:id="@+id/tv_scroll_top"
+            android:layout_width="0dp"
+            android:textColor="@color/primary_text_default_material_light"
+            android:text="Scroll to top"
+            android:gravity="center"
+            android:textSize="18sp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"/>
+
+    </LinearLayout>
+</LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/meta_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#0277BD"
+        android:layout_gravity="bottom"
+        android:orientation="vertical"
+        android:paddingTop="20dp"
+        android:elevation="4dp"
+>
+
+
+        <TextView
+            android:paddingLeft="32dp"
+            android:paddingRight="32dp"
+            android:id="@+id/article_title"
+            style="?android:attr/textAppearanceLarge"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/detail_metabar_title_bottom_padding"
+            android:fontFamily="sans-serif-condensed"
+            android:textColor="#fff"
+            android:textStyle="bold"
+            android:textSize="@dimen/detail_title_text_size"
+            android:lineSpacingMultiplier="0.9" />
+
+        <TextView
+            android:paddingLeft="32dp"
+            android:paddingRight="32dp"
+            android:id="@+id/article_byline"
+            style="?android:attr/textAppearanceSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="10dp"
+            android:textColor="#fff"
+            />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="4dp"
+            android:id="@+id/color_divider_meta"
+            />
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scaleType="fitXY"
+            android:id="@+id/imageview_main"/>
+    </LinearLayout>
 
     <ImageButton android:id="@+id/share_fab"
         android:stateListAnimator="@anim/fab_state_list_anim"

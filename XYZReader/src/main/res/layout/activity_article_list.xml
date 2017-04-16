@@ -8,11 +8,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="?colorPrimary"
-        android:elevation="8dp">
+        android:elevation="4dp">
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
-            android:background="#4E2CB8"
+            android:background="#0277BD"
             android:layout_width="match_parent"
             android:layout_height="?actionBarSize"
             android:contentInsetLeft="0dp"
@@ -32,13 +32,7 @@
                 android:layout_height="wrap_content"
                 android:src="@drawable/zyx_logo_white"
                 android:contentDescription="@string/app_name" />
-            <!--<TextView-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="match_parent"-->
-                <!--android:gravity="center"-->
-                <!--android:textSize="20sp"-->
-                <!--android:text="XYZ"-->
-                <!--android:textColor="@color/primary_text_default_material_dark"/>-->
+           
 
         </android.support.v7.widget.Toolbar>
     </FrameLayout>
