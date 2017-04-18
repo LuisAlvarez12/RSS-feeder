@@ -78,7 +78,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:orientation="horizontal"
-        android:background="@color/primary_text_dark"
+        android:background="@color/primary_text_default_material_light"
         android:layout_height="@dimen/height_general_40">
 
         <TextView
