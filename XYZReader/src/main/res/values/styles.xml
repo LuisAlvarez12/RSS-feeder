@@ -20,7 +20,7 @@
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/theme_primary</item>
         <item name="colorPrimaryDark">@color/theme_primary_dark</item>
-        <item name="android:textColorPrimary">@color/primary_text_default_material_dark</item>
+        <item name="android:textColorPrimary">@color/primary_text_light</item>
 
     </style>
 

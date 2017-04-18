@@ -52,6 +52,7 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 
 import static android.R.attr.bitmap;
 
@@ -65,34 +66,29 @@ public class ArticleListActivity extends ActionBarActivity implements
         LoaderManager.LoaderCallbacks<Cursor> {
 
     private static final String TAG = ArticleListActivity.class.toString();
-    private Toolbar mToolbar;
-    private SwipeRefreshLayout mSwipeRefreshLayout;
-    private RecyclerView mRecyclerView;
     private SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.sss");
     // Use default locale format
     private SimpleDateFormat outputFormat = new SimpleDateFormat();
     // Most time functions can only handle 1902 - 2037
-    private GregorianCalendar START_OF_EPOCH = new GregorianCalendar(2,1,1);
+    private GregorianCalendar START_OF_EPOCH = new GregorianCalendar(2, 1, 1);
 
 
     @BindView(R.id.recycler_view)
     RecyclerView mRecyclerView;
 
+    @BindView(R.id.swipe_refresh_layout)
+    SwipeRefreshLayout mSwipeRefreshLayout;
+
+    @BindView(R.id.main_toolbar)
+    Toolbar mToolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_article_list);
-
+        ButterKnife.bind(this);
         //regular toolbar
-        mToolbar = (Toolbar) findViewById(R.id.main_toolbar);
         setSupportActionBar(mToolbar);
-        //frame layout containing toolbar
-//        final View toolbarContainerView = findViewById(R.id.toolbar_container);
-        mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh_layout);
-
-        //list of items
-        mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         //start the loader that kicks off Article Loaders query
         getLoaderManager().initLoader(0, null, this);
 
@@ -155,36 +151,14 @@ public class ArticleListActivity extends ActionBarActivity implements
         int columnCount = getResources().getInteger(R.integer.list_column_count);
         StaggeredGridLayoutManager sglm =
                 new StaggeredGridLayoutManager(columnCount, StaggeredGridLayoutManager.VERTICAL);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.VERTICAL,false));
-//        DynamicHeightNetworkImageView img = (DynamicHeightNetworkImageView)adapter..findViewById(R.id.thumbnail);
-//        BitmapDrawable drawable = (BitmapDrawable) img.getDrawable();
-//        Bitmap bitmap = drawable.getBitmap();
-//        Palette p = Palette.generate(bitmap);
-//        img.setBackgroundColor(p.getDominantSwatch().getRgb());
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            mRecyclerView.setOnScrollChangeListener(new View.OnScrollChangeListener() {
-                @Override
-                public void onScrollChange(View v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
-                    Log.d("scroller", "current: " + scrollY + "    bottom "+ mRecyclerView.getBottom());
-                    Log.d("scroller", "current: " + scrollX + "    bottom "+ mRecyclerView.getBottom());
 
-                    Log.d("scroller", "current: " + oldScrollX + "    bottom "+ mRecyclerView.getBottom());
-
-                    Log.d("scroller", "current: " + oldScrollY + "    bottom "+ mRecyclerView.getBottom());
-
-                }
-            });
-        }
     }
+
 
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {
         mRecyclerView.setAdapter(null);
     }
-
-
-
-
 
 
     //establish the adapter for the recyclerview grid
@@ -226,8 +200,7 @@ public class ArticleListActivity extends ActionBarActivity implements
                 String date = mCursor.getString(ArticleLoader.Query.PUBLISHED_DATE);
                 return dateFormat.parse(date);
             } catch (ParseException ex) {
-                Log.e(TAG, ex.getMessage());
-                Log.i(TAG, "passing today's date");
+
                 return new Date();
             }
         }
@@ -255,10 +228,10 @@ public class ArticleListActivity extends ActionBarActivity implements
                                 + mCursor.getString(ArticleLoader.Query.AUTHOR)));
             }
 
-               holder.thumbnailView.setImageUrl(
+            holder.thumbnailView.setImageUrl(
 ////                    //ex. url is https://d17h27t6h515a5.cloudfront.net/topher/2017/March/58c5be62_scarlet-plague/scarlet-plague.jpg
                     mCursor.getString(ArticleLoader.Query.THUMB_URL),
-                    ImageLoaderHelper.getInstance(ArticleListActivity.this).getImageLoader(),holder.breakpoint);
+                    ImageLoaderHelper.getInstance(ArticleListActivity.this).getImageLoader(), holder.breakpoint);
             holder.thumbnailView.setAspectRatio(mCursor.getFloat(ArticleLoader.Query.ASPECT_RATIO));
 
         }
@@ -268,8 +241,6 @@ public class ArticleListActivity extends ActionBarActivity implements
             return mCursor.getCount();
         }
     }
-
-
 
 
     public static class ViewHolder extends RecyclerView.ViewHolder {

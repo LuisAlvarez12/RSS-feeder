@@ -2,10 +2,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginLeft="4dp"
-    android:layout_marginRight="4dp"
-    android:layout_marginTop="4dp"
-    android:layout_marginBottom="4dp"
+    android:layout_marginLeft="@dimen/margin_card_small"
+    android:layout_marginRight="@dimen/margin_card_small"
+    android:layout_marginTop="@dimen/margin_card_small"
+    android:layout_marginBottom="@dimen/margin_card_small"
+    android:elevation="@dimen/elev_card_and_button"
     android:clickable="true"
     android:focusable="true"
     android:foreground="?selectableItemBackground">
@@ -23,7 +24,7 @@
     <LinearLayout
         android:gravity="bottom"
         android:layout_width="match_parent"
-        android:background="#80000000"
+        android:background="@color/black_cardview_transparent"
         android:layout_height="match_parent"
         android:layout_gravity="bottom"
         android:orientation="vertical">
@@ -36,18 +37,18 @@
             style="@style/TextAppearance.AppCompat.Subhead"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingLeft="16dp"
-            android:paddingTop="16dp"
-            android:paddingRight="16dp"
-            android:paddingBottom="4dp"
+            android:paddingLeft="@dimen/padding_general_16"
+            android:paddingTop="@dimen/padding_general_16"
+            android:paddingRight="@dimen/padding_general_16"
+            android:paddingBottom="@dimen/padding_general_16"
             android:textColor="@color/ltgray"
             android:ellipsize="end"
             android:maxLines="4" />
         <View
             android:id="@+id/breakpoint"
-            android:layout_width="100dp"
-            android:layout_marginLeft="16dp"
-            android:layout_height="2dp"
+            android:layout_width="@dimen/width_var_100"
+            android:layout_marginLeft="@dimen/padding_general_16"
+            android:layout_height="@dimen/height_breakpoint"
             />
 
         <TextView
@@ -55,10 +56,10 @@
             style="@style/TextAppearance.AppCompat.Body1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingLeft="16dp"
-            android:paddingRight="16dp"
-            android:paddingBottom="16dp"
-            android:textColor="@color/secondary_text_default_material_dark"
+            android:paddingLeft="@dimen/padding_general_16"
+            android:paddingRight="@dimen/padding_general_16"
+            android:paddingBottom="@dimen/padding_general_16"
+            android:textColor="@color/secondary_text_light"
             android:maxLines="2"
             android:ellipsize="end" />
     </LinearLayout>

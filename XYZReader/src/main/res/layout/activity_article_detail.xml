@@ -13,12 +13,6 @@
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize">
 
-        <ImageButton
-            android:id="@+id/action_up"
-            android:layout_width="56dp"
-            android:layout_height="?actionBarSize"
-            android:background="?selectableItemBackgroundBorderless"
-            android:contentDescription="@string/up"
-            android:src="@drawable/ic_arrow_back" />
+
     </FrameLayout>
 </FrameLayout>

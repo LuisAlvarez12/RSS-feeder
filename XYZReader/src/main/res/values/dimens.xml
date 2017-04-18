@@ -9,4 +9,43 @@
     <dimen name="fab_press_translation_z">6dp</dimen>
     <dimen name="fab_margin">24dp</dimen>
 
+    <!--margins-->
+    <dimen name="margin_card_small">4dp</dimen>
+    <dimen name="margin_general_16">16dp</dimen>
+    <dimen name="margin_general_8">8dp</dimen>
+    <dimen name="margin_general_40">40dp</dimen>
+
+
+
+
+    <!--padding-->
+    <dimen name="padding_general_16">16dp</dimen>
+    <dimen name="padding_tv_bottom_10">10dp</dimen>
+    <dimen name="padding_general_32">32dp</dimen>
+    <dimen name="padding_top_4">4dp</dimen>
+    <dimen name="padding_general_and_metabar">20dp</dimen>
+
+    <!--width-->
+    <dimen name="width_var_100">100dp</dimen>
+    <dimen name="width_fab">56dp</dimen>
+    <dimen name="width_general_40">40dp</dimen>
+
+    <!--height-->
+    <dimen name="height_breakpoint">2dp</dimen>
+    <dimen name="height_var_100">100dp</dimen>
+    <dimen name="height_fab_back">56dp</dimen>
+    <dimen name="height_general_4">4dp</dimen>
+    <dimen name="height_general_40">40dp</dimen>
+
+
+    <!--text size-->
+    <dimen name="textsize_byline_and_details">18sp</dimen>
+
+    <!--elevation-->
+    <dimen name="elev_appbar_and_toolbar">4dp</dimen>
+    <dimen name="elev_fab">6dp</dimen>
+    <dimen name="elev_card_and_button">2dp</dimen>
+    <dimen name="elev_drawer">16dp</dimen>
+
+
 </resources>
