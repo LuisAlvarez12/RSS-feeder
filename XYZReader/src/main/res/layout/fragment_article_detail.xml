@@ -2,6 +2,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/draw_insets_frame_layout"
     android:layout_width="match_parent"
+    android:background="@color/secondary_white_bg"
     android:layout_height="match_parent">
 
     <com.example.xyzreader.ui.ObservableScrollView
@@ -20,8 +21,7 @@
             <FrameLayout
                 android:id="@+id/photo_container"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/photo_placeholder">
+                android:layout_height="wrap_content">
                 <!--suppress AndroidLintContentDescription -->
                 <ImageView
                     android:id="@+id/photo"
@@ -31,8 +31,9 @@
 
                 <View
                     android:layout_width="match_parent"
-                    android:layout_height="112dp"
-                    android:background="@drawable/photo_background_protection" />
+                    android:layout_height="112dp"/>
+                    <!--android:background="@drawable/photo_background_protection" -->
+
 
             </FrameLayout>
 
@@ -42,7 +43,6 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:maxWidth="@dimen/detail_card_max_width"
-                android:background="#fff"
                 android:paddingTop="20dp"
                 android:elevation="2dp"
                 >
@@ -71,15 +71,15 @@
     android:paddingTop="4dp"
     android:elevation="2dp"
     android:layout_height="wrap_content">
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:id="@+id/color_divider_nav"
-        />
+    <!--<View-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="2dp"-->
+        <!--android:id="@+id/color_divider_nav"-->
+        <!--/>-->
     <LinearLayout
         android:layout_width="match_parent"
         android:orientation="horizontal"
-        android:background="@color/cardview_light_background"
+        android:background="@color/primary_text_default_material_light"
         android:layout_height="40dp">
 
         <TextView
@@ -89,19 +89,20 @@
             android:text="Show details"
             android:textSize="18sp"
             android:gravity="center"
-            android:textColor="@color/primary_text_default_material_light"
+            android:textColor="#FFFFFF"
             android:layout_weight="1"/>
         <View
             android:layout_width="2dp"
             android:layout_height="match_parent"
             android:id="@+id/color_divider"
+            android:background="#FFFFFF"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
             />
         <TextView
             android:id="@+id/tv_scroll_top"
             android:layout_width="0dp"
-            android:textColor="@color/primary_text_default_material_light"
+            android:textColor="#FFFFFF"
             android:text="Scroll to top"
             android:gravity="center"
             android:textSize="18sp"
@@ -111,18 +112,19 @@
     </LinearLayout>
 </LinearLayout>
 
-    <LinearLayout
+    <FrameLayout
         android:id="@+id/meta_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#0277BD"
         android:layout_gravity="bottom"
-        android:orientation="vertical"
         android:paddingTop="20dp"
         android:elevation="4dp"
 >
 
-
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="wrap_content">
         <TextView
             android:paddingLeft="32dp"
             android:paddingRight="32dp"
@@ -157,18 +159,21 @@
             android:layout_height="wrap_content"
             android:scaleType="fitXY"
             android:id="@+id/imageview_main"/>
-    </LinearLayout>
 
-    <ImageButton android:id="@+id/share_fab"
-        android:stateListAnimator="@anim/fab_state_list_anim"
-        android:background="@drawable/add_fab_background"
-        android:layout_gravity="bottom|end"
-        android:layout_marginRight="@dimen/fab_margin"
-        android:layout_marginBottom="@dimen/fab_margin"
-        android:layout_width="56dp"
-        android:layout_height="56dp"
-        android:src="@drawable/ic_share"
-        android:elevation="@dimen/fab_elevation"
-        android:contentDescription="@string/action_share" />
+        </LinearLayout>
+        <android.support.design.widget.FloatingActionButton android:id="@+id/share_fab"
+            android:stateListAnimator="@anim/fab_state_list_anim"
+            android:background="@drawable/add_fab_background"
+            android:layout_gravity="bottom|end"
+            android:layout_marginRight="@dimen/fab_margin"
+            android:layout_marginBottom="@dimen/fab_margin"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:src="@drawable/ic_share"
+            android:elevation="@dimen/fab_elevation"
+            android:contentDescription="@string/action_share" />
+    </FrameLayout>
+
+
 
 </com.example.xyzreader.ui.DrawInsetsFrameLayout>
