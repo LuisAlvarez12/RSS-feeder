@@ -59,7 +59,7 @@
             android:paddingLeft="@dimen/padding_general_16"
             android:paddingRight="@dimen/padding_general_16"
             android:paddingBottom="@dimen/padding_general_16"
-            android:textColor="@color/secondary_text_light"
+            android:textColor="@color/secondary_text_default_material_light"
             android:maxLines="2"
             android:ellipsize="end" />
     </LinearLayout>
