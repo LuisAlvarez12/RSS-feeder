@@ -123,6 +123,9 @@ public class ArticleDetailFragment extends Fragment implements
     @BindView(R.id.article_body)
     TextView bodyView;
 
+    @BindView(R.id.action_up)
+    View mUpButton;
+
 
 
     /**
@@ -183,6 +186,12 @@ public class ArticleDetailFragment extends Fragment implements
                 mTopInset = insets.top;
             }
         });
+        mUpButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getActivity().onBackPressed();
+            }
+        });
 
         mScrollView.setCallbacks(new ObservableScrollView.Callbacks() {
             @Override
@@ -195,7 +204,7 @@ public class ArticleDetailFragment extends Fragment implements
             }
         });
 
-        
+
 
         animationMetaBarHandler();
         bindViews();
