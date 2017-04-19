@@ -1,10 +1,8 @@
 package com.example.xyzreader.ui;
 
 import android.animation.Animator;
-import android.app.Dialog;
 import android.app.Fragment;
 import android.app.LoaderManager;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.Loader;
 import android.content.res.ColorStateList;
@@ -14,6 +12,28 @@ import android.graphics.Color;
 import android.graphics.Rect;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
+import android.os.Build;
+import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.ShareCompat;
+import android.support.v7.graphics.Palette;
+import android.text.Html;
+import android.text.format.DateUtils;
+import android.text.method.LinkMovementMethod;
+import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.ImageLoader;
+import com.example.xyzreader.R;
+import com.example.xyzreader.data.ArticleLoader;
+import com.mancj.slideup.SlideUp;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -21,36 +41,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.GregorianCalendar;
-
-import android.net.Uri;
-import android.os.Build;
-import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.ShareCompat;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.graphics.Palette;
-import android.text.Html;
-import android.text.format.DateUtils;
-import android.text.method.LinkMovementMethod;
-import android.util.Log;
-import android.view.Gravity;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
-import android.widget.FrameLayout;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-import android.widget.Toast;
-
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.ImageLoader;
-import com.example.xyzreader.R;
-import com.example.xyzreader.data.ArticleLoader;
-import com.mancj.slideup.SlideUp;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -64,8 +54,6 @@ import static android.view.View.VISIBLE;
  */
 public class ArticleDetailFragment extends Fragment implements
         LoaderManager.LoaderCallbacks<Cursor> {
-    private static final String TAG = "ArticleDetailFragment";
-
     public static final String ARG_ITEM_ID = "item_id";
     private static final float PARALLAX_FACTOR = 1.25f;
 
@@ -197,7 +185,6 @@ public class ArticleDetailFragment extends Fragment implements
             @Override
             public void onScrollChanged() {
                 mScrollY = mScrollView.getScrollY();
-//                getActivityCast().onUpButtonFloorChanged(mItemId, ArticleDetailFragment.this);
                 mPhotoContainerView.setTranslationY((int) (mScrollY - mScrollY / PARALLAX_FACTOR));
                 updateStatusBar();
 
@@ -285,6 +272,7 @@ public class ArticleDetailFragment extends Fragment implements
             }
         });
 
+        //creates a slidable layout, not unused
         final SlideUp slideup = new SlideUp.Builder(titleHolder)
                 .withStartState(SlideUp.State.HIDDEN)
                 .withStartGravity(Gravity.BOTTOM).withListeners(new SlideUp.Listener() {
@@ -426,22 +414,44 @@ public class ArticleDetailFragment extends Fragment implements
             Date publishedDate = parsePublishedDate();
             //if not before 1970
             if (!publishedDate.before(START_OF_EPOCH.getTime())) {
-                bylineView.setText(Html.fromHtml(
-                        DateUtils.getRelativeTimeSpanString(
-                                publishedDate.getTime(),
-                                System.currentTimeMillis(), DateUtils.HOUR_IN_MILLIS,
-                                DateUtils.FORMAT_ABBREV_ALL).toString()
-                                + "<br/> by <font color='#ffffff'>"
-                                + mCursor.getString(ArticleLoader.Query.AUTHOR)
-                                + "</font>"));
-
+                if (Build.VERSION.SDK_INT >= 24) {
+                    bylineView.setText(Html.fromHtml(
+                            DateUtils.getRelativeTimeSpanString(
+                                    publishedDate.getTime(),
+                                    System.currentTimeMillis(), DateUtils.HOUR_IN_MILLIS,
+                                    DateUtils.FORMAT_ABBREV_ALL).toString()
+                                    + "<br/> by <font color='#ffffff'>"
+                                    + mCursor.getString(ArticleLoader.Query.AUTHOR)
+                                    + "</font>",Html.FROM_HTML_MODE_COMPACT));
+                    // for 24 api and more
+                } else {
+                    bylineView.setText(Html.fromHtml(
+                            DateUtils.getRelativeTimeSpanString(
+                                    publishedDate.getTime(),
+                                    System.currentTimeMillis(), DateUtils.HOUR_IN_MILLIS,
+                                    DateUtils.FORMAT_ABBREV_ALL).toString()
+                                    + "<br/> by <font color='#ffffff'>"
+                                    + mCursor.getString(ArticleLoader.Query.AUTHOR)
+                                    + "</font>"));
+                }
             } else {
                 // If date is before 1902, just show the string
-                bylineView.setText(Html.fromHtml(
-                        outputFormat.format(publishedDate) + " by <font color='#ffffff'>"
-                                + mCursor.getString(ArticleLoader.Query.AUTHOR)
-                                + "</font>"));
-
+                if (Build.VERSION.SDK_INT >= 24) {
+                    bylineView.setText(Html.fromHtml(
+                            DateUtils.getRelativeTimeSpanString(
+                                    publishedDate.getTime(),
+                                    System.currentTimeMillis(), DateUtils.HOUR_IN_MILLIS,
+                                    DateUtils.FORMAT_ABBREV_ALL).toString()
+                                    + "<br/> by <font color='#ffffff'>"
+                                    + mCursor.getString(ArticleLoader.Query.AUTHOR)
+                                    + "</font>",Html.FROM_HTML_MODE_COMPACT));
+                    // for 24 api and more
+                } else {
+                    bylineView.setText(Html.fromHtml(
+                            outputFormat.format(publishedDate) + " by <font color='#ffffff'>"
+                                    + mCursor.getString(ArticleLoader.Query.AUTHOR)
+                                    + "</font>"));
+                }
             }
 
             bodyView.setText(Html.fromHtml(mCursor.getString(ArticleLoader.Query.BODY).replaceAll("(\r\n|\n)", "<br />")));
@@ -453,7 +463,7 @@ public class ArticleDetailFragment extends Fragment implements
                             final Bitmap bitmap = imageContainer.getBitmap();
                             if (bitmap != null) {
                                 //
-                                Palette p = Palette.generate(bitmap, 12);
+                                Palette p = Palette.from(bitmap).generate();
                                 mMutedColor = p.getDominantSwatch().getRgb();
 
 
