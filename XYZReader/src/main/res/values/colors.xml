@@ -19,7 +19,7 @@
     <color name="photo_placeholder">#ccc</color>
 
     <color name="theme_primary">#FF9800</color>
-    <color name="theme_primary_dark">#E65100</color>
+    <color name="theme_primary_dark">#F57C00</color>
     <color name="ltgray">#ffe0e0e0</color>
     <!-- 87% black -->
     <color name="primary_text_default_material_light">#de000000</color>

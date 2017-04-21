@@ -7,13 +7,18 @@
     android:background="@android:color/background_light"
     android:fitsSystemWindows="true">
 
-
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:elevation="@dimen/elev_appbar_and_toolbar">
     <android.support.v7.widget.Toolbar
         android:id="@+id/main.toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@color/theme_primary"
-        android:elevation="@dimen/elev_appbar_and_toolbar" />
+         />
+    </android.support.design.widget.AppBarLayout>
+
 
 
     <android.support.v4.widget.SwipeRefreshLayout
