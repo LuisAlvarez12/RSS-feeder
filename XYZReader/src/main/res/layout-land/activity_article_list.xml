@@ -24,7 +24,7 @@
         android:background="@color/secondary_white_bg">
 
         <android.support.v7.widget.RecyclerView
-            app:layoutManager="android.support.v7.widget.GridLayoutManager"
+            app:layoutManager="android.support.v7.widget.StaggeredGridLayoutManager"
             android:id="@+id/recycler_view"
             app:spanCount="2"
             android:layout_width="match_parent"
