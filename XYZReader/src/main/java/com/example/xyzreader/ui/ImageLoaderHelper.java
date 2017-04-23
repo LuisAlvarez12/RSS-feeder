@@ -2,10 +2,7 @@ package com.example.xyzreader.ui;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.Color;
 import android.support.v4.util.LruCache;
-import android.support.v7.graphics.Palette;
-import android.view.View;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.ImageLoader;

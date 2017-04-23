@@ -452,6 +452,7 @@ public class ArticleDetailFragment extends Fragment implements
                                     + mCursor.getString(ArticleLoader.Query.AUTHOR)
                                     + "</font>"));
                 }
+
             }
 
             bodyView.setText(Html.fromHtml(mCursor.getString(ArticleLoader.Query.BODY).replaceAll("(\r\n|\n)", "<br />")));
