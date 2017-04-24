@@ -38,7 +38,7 @@ import android.text.TextUtils;
  */
 public class SelectionBuilder {
     private String mTable = null;
-    private HashMap<String, String> mProjectionMap;
+
     private StringBuilder mSelection;
     private ArrayList<String> mSelectionArgs;
 
@@ -129,6 +129,7 @@ public class SelectionBuilder {
     }
 
     private void mapColumns(String[] columns) {
+        HashMap<String, String> mProjectionMap =null;
     	if (mProjectionMap == null) return;
         for (int i = 0; i < columns.length; i++) {
             final String target = mProjectionMap.get(columns[i]);

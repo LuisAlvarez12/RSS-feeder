@@ -387,7 +387,7 @@ public class ArticleDetailFragment extends Fragment implements
             return new Date();
         }
     }
-
+    @SuppressWarnings("deprecation")
     private void bindViews() {
         if (mRootView == null) {
             return;
@@ -420,6 +420,7 @@ public class ArticleDetailFragment extends Fragment implements
                                     + "</font>",Html.FROM_HTML_MODE_COMPACT));
                     // for 24 api and more
                 } else {
+
                     bylineView.setText(Html.fromHtml(
                             DateUtils.getRelativeTimeSpanString(
                                     publishedDate.getTime(),
