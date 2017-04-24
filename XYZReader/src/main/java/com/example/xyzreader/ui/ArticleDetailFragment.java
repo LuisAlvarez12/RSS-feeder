@@ -67,7 +67,6 @@ public class ArticleDetailFragment extends Fragment implements
     private boolean mIsCard = false;
     private int mStatusBarFullOpacityBottom;
     private boolean layoutHidden, animationDone;
-    private final int ANIMATION_SPEED = 300;
 
     private SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.sss");
     // Use default locale format
@@ -145,11 +144,6 @@ public class ArticleDetailFragment extends Fragment implements
         mStatusBarFullOpacityBottom = getResources().getDimensionPixelSize(
                 R.dimen.detail_card_top_margin);
         setHasOptionsMenu(true);
-    }
-
-    //context retriever
-    public ArticleDetailActivity getActivityCast() {
-        return (ArticleDetailActivity) getActivity();
     }
 
     @Override
@@ -292,6 +286,7 @@ public class ArticleDetailFragment extends Fragment implements
                         }
                     }
                 }).build();
+        slideup.isVisible();
 
         layoutHidden = false;
         mStatusBarColorDrawable = new ColorDrawable(0);

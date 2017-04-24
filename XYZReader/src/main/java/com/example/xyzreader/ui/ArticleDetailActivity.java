@@ -53,6 +53,7 @@ public class ArticleDetailActivity extends AppCompatActivity
                             View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
         }
         setContentView(R.layout.activity_article_detail);
+
         ButterKnife.bind(this);
         //start loader
         getLoaderManager().initLoader(0, null, this);
